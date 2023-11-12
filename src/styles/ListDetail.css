@@ -1,0 +1,140 @@
+body {
+    background-color: #dfe0df !important;
+  }
+
+  .shoplist-header,
+  .section-item,
+  .mt-3{
+    border-bottom: 2px solid rgb(133, 131, 131);  
+  }
+
+  .list-group{
+    margin-bottom: 10px;
+  }
+
+
+  .shoplist-header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .change-name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .list-group-item {
+    padding: 4px 8px !important;
+    display: flex !important;
+    
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .list-group-item:last-child{
+    margin-bottom: 10px;
+  }
+  .sec1{
+    margin-top: 70px;
+  }
+
+  .form-check{
+    width: 100%;
+  }
+
+  .form-check-label{
+    float: left;
+  }
+
+  
+  .form-control, #members-list-item {
+    margin-bottom: 2.5px !important;
+    padding: 2.5px 5px !important;
+  }
+  
+  .select-food {
+    width: 50%;
+  }
+  
+  .input-quantity {
+    width: 20%;
+  }
+  
+  .btn-danger,
+  .btn-warning {
+    background-color: #ff4136;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+  }
+  
+  .form-check-input {
+    margin-right: 10px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .list-group-item.list-group-item-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    text-decoration: line-through;
+  }
+  
+  .list-group-item .btn {
+    margin-left: 10px;
+  }
+  
+  .form-controlstate {
+    width: 30%;
+  }
+  
+  h1 {
+    font-size: 32px;
+    text-align: center;
+  }
+  
+  #members-list-item {
+    color: #333;
+    padding: 5px;
+  }
+  
+  #members-list-item .btn {
+    margin-left: 10px;
+  }
+  
+  .container {
+    padding: 20px;
+    border-radius: 10px;
+    width: 100% !important;
+    text-align: center; /* Vodorovné vycentrování obsahu */
+    margin: 0 auto; /* Vytvoření vodorovného středu */
+  }
+  
+  
+  .row,
+  .uslist {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+
+
+  #members-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  input[type=checkbox] {
+  padding: 5px;
+  display: inline-block;
+}
+  

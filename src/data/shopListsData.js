@@ -1,0 +1,63 @@
+export const shoppingLists = [
+  {
+    id: 1,
+    name: 'ShopList1',
+    itemsList: [],
+    members: [],
+    archived: false,
+    ownerId: 1,
+  },
+  {
+    id: 2,
+    name: 'ShopList2',
+    itemsList: [],
+    members: [],
+    archived: false,
+    ownerId: 1,
+  },
+  {
+    id: 3,
+    name: 'ShopList3',
+    itemsList: [],
+    members: [
+      { id: 7, name: 'Adam' },
+      { id: 8, name: 'Adam' },
+    ],
+    archived: false,
+    ownerId: 2,
+  },
+  {
+    id: 6,
+    name: 'ShopList4',
+    itemsList: [],
+    members: [],
+    archived: false,
+    ownerId: 1,
+  },
+  {
+    id: 7,
+    name: 'ShopList5',
+    itemsList: [],
+    members: [],
+    archived: false,
+    ownerId: 2,
+  },
+  {
+    id: 5,
+    name: 'ShopListArchived',
+    itemsList: [],
+    members: [
+      { id: 11, name: 'Adam' },
+    ],
+    archived: true,
+    ownerId: 2,
+  },
+  {
+    id: 4,
+    name: 'ShopListArchived',
+    itemsList: [],
+    members: [],
+    archived: true,
+    ownerId: 1,
+  },
+];

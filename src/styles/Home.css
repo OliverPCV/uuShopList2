@@ -1,0 +1,11 @@
+
+
+.card-links{
+    display: flex;
+    justify-content: space-around;
+}
+
+.home-buttons{
+    display: flex !important;
+    justify-content: space-between !important;
+}
