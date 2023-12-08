@@ -10,6 +10,8 @@ import UserService from '../services/userService';
 
 import { useContext } from 'react';
 import { ThemeContext } from '../context/Theme';
+import { useLanguage } from '../context/LanguageContext';
+
 
 
 const ListDetail = () => {
@@ -26,6 +28,10 @@ const ListDetail = () => {
   const [filter, setFilter] = useState('all');
   const [showModal, setShowModal] = useState(false);
   const [newListName, setNewListName] = useState(() => selectedList.name);
+
+  // Language
+  const { translate } = useLanguage();
+
 
   const { theme } = useContext(ThemeContext);
   useEffect(() => {
@@ -56,7 +62,7 @@ const ListDetail = () => {
       };
       setItems([...items, newItem]);
       setSelectedFood('');
-    } 
+    }
   };
 
   const removeItem = (itemId) => {
@@ -120,36 +126,36 @@ const ListDetail = () => {
         <div className="mt-4">
           {currentUser.id !== selectedListOwner && (
             <button className="btn btn-danger" onClick={leaveList}>
-              Leave List
+              {translate('leaveList')}
             </button>
           )}
         </div>
         {currentUser.id === selectedListOwner && (
           <div className="change-name col-md-4 col-sm-6">
             <button className="btn btn-primary btn-block" onClick={openModal}>
-              Change List Name
+              {translate('changeListName')}
             </button>
 
             <Modal show={showModal} onHide={closeModal}>
               <Modal.Header closeButton>
-                <Modal.Title>Change List Name</Modal.Title>
+                <Modal.Title>{translate('changeListName')}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <label>New List Name: </label>
+                <label>{translate('newListName')}: </label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Enter new list name"
+                  placeholder={translate('enterNewListName')}
                   value={newListName}
                   onChange={(e) => setNewListName(e.target.value)}
                 />
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={closeModal}>
-                  Cancel
+                  {translate('cancel')}
                 </Button>
                 <Button variant="primary" onClick={confirmNameChange}>
-                  Confirm
+                  {translate('confirm')}
                 </Button>
               </Modal.Footer>
             </Modal>
@@ -159,27 +165,21 @@ const ListDetail = () => {
       </div>
 
       <section className="section-item">
-
-
         <div className="sec1">
           <div className="row mb-2">
             <div className="col-md-4 col-sm-6">
-              <label>Item: </label>
-              <select
-                className="form-control select-food"
-                value={selectedFood}
-                onChange={(e) => setSelectedFood(e.target.value)}
-              >
-                <option value="">Select item</option>
+              <label>{translate('item')}: </label>
+              <select className="form-control select-food" value={selectedFood} onChange={(e) => setSelectedFood(e.target.value)}>
+                <option value="">{translate('selectItem')}</option>
                 {itemList.map((food, index) => (
                   <option key={index} value={food.name}>
-                    {food.name}
+                    {translate(food.name)}
                   </option>
                 ))}
               </select>
             </div>
             <div className="col-md-2 col-sm-3">
-              <label>Quantity: </label>
+              <label>{translate('quantity')}: </label>
               <input
                 type="number"
                 className="form-control input-quantity"
@@ -191,17 +191,17 @@ const ListDetail = () => {
             </div>
             <div className="col-md-2 col-sm-3">
               <button className="btn btn-primary btn-block" onClick={addItem}>
-                Add Item
+                {translate('addItem')}
               </button>
             </div>
           </div>
         </div>
         <div className="mb-2">
-          <label>Filter: </label>
+          <label>{translate('filter')}: </label>
           <select className="form-controlstate" onChange={(e) => setFilter(e.target.value)}>
-            <option value="all">All</option>
-            <option value="completed">Completed</option>
-            <option value="uncompleted">Uncompleted</option>
+            <option value="all">{translate('all')}</option>
+            <option value="completed">{translate('completed')}</option>
+            <option value="uncompleted">{translate('uncompleted')}</option>
           </select>
         </div>
         <ul className="list-group">
@@ -215,12 +215,12 @@ const ListDetail = () => {
                   onChange={() => toggleItemCompletion(item.id)}
                 />
                 <label className="form-check-label">
-                  {item.quantity}x {item.name}
+                  {item.quantity}x {translate(item.name)}
                 </label>
               </div>
               <div className="float-right">
                 <button className="btn btn-danger btn-sm" onClick={() => removeItem(item.id)}>
-                  Remove
+                  {translate('remove')}
                 </button>
               </div>
             </li>
@@ -229,12 +229,11 @@ const ListDetail = () => {
       </section>
       {currentUser.id === selectedListOwner && (
         <div className="mt-3">
-          <p>Users: </p>
+          <p>{translate('users')}: </p>
           <div className="row">
-
             <div className="col-md-2 col-sm-3">
-              <button className="btn btn-primary mt-2" onClick={() => addMember('New Member')}>
-                Add Member
+              <button className="btn btn-primary mt-2" onClick={() => addMember(translate('newMember'))}>
+                {translate('addMember')}
               </button>
             </div>
           </div>
@@ -244,7 +243,7 @@ const ListDetail = () => {
                 <li key={member.id} className="list-group-item" id="members-list-item">
                   {member.name}
                   <button className="btn btn-danger btn-sm" onClick={() => removeMember(member.id)}>
-                    Remove Member
+                    {translate('removeMember')}
                   </button>
                 </li>
               ))}
@@ -254,9 +253,8 @@ const ListDetail = () => {
       )}
       {currentUser.id !== selectedListOwner && (
         <>
-          <p>Users: </p>
-          <div
-            className="uslist">
+          <p>{translate('users')}: </p>
+          <div className="uslist">
             <ul className="list-group" id="members-list">
               {members.map((member) => (
                 <li key={member.id} className="list-group-item" id="members-list-item">
@@ -264,9 +262,9 @@ const ListDetail = () => {
                 </li>
               ))}
             </ul>
-          </div></>
+          </div>
+        </>
       )}
-
     </div>
   );
 };

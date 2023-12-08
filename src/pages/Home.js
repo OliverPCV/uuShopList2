@@ -8,6 +8,8 @@ import '../styles/Home.css';
 
 import { useContext } from 'react';
 import { ThemeContext } from '../context/Theme';
+import { useLanguage } from '../context/LanguageContext';
+
 
 function Home() {
   const userService = new UserService();
@@ -17,6 +19,9 @@ function Home() {
   const [newListName, setNewListName] = useState('');
   const [confirmDeleteList, setConfirmDeleteList] = useState(null);
   const [showActive, setShowActive] = useState(true);
+
+  const { translate } = useLanguage();
+
 
   const { theme } = useContext(ThemeContext);
   useEffect(() => {
@@ -84,29 +89,28 @@ function Home() {
 
   return (
     <div className={`container ${theme === 'light' ? 'light-theme' : 'dark-theme'}`}>
-      <h1 className="mt-1">Shopping Lists</h1>
+      <h1 className="mt-1">{translate('shoppingLists')}</h1>
 
       <div className="home-buttons mb-2">
-
-        <div className='filter-buttons'>
+        <div className="filter-buttons">
           <Button
             variant="secondary"
             className="mr-2"
             onClick={() => setShowActive(false)}
             disabled={!showActive}
           >
-            Show All
+            {translate('showAll')}
           </Button>
           <Button
             variant="secondary"
             onClick={() => setShowActive(true)}
             disabled={showActive}
           >
-            Hide Archive
+            {translate('hideArchive')}
           </Button>
         </div>
         <Button variant="primary" className="ml-2" onClick={openAddModal}>
-          Create
+          {translate('create')}
         </Button>
       </div>
 
@@ -116,10 +120,12 @@ function Home() {
             <div className={`card mb-4 ${list.archived ? 'border-success' : ''}`}>
               <div className="card-body">
                 <h5 className="card-title">{list.name}</h5>
-                <p className='card-userId'>Owned by user: {list.ownerId}</p>
-                <div className='card-links'>
+                <p className="card-userId">
+                  {translate('ownedByUser')} {list.ownerId}
+                </p>
+                <div className="card-links">
                   <Link to={`/listdetail/${list.id}`} className="btn btn-primary">
-                    View List
+                    {translate('viewList')}
                   </Link>
                   {list.ownerId === currentUser.id && (
                     <div className="card-buttons">
@@ -128,11 +134,9 @@ function Home() {
                         className="ml-2"
                         onClick={() => openDeleteConfirmation(list.id)}
                       >
-                        Delete List
+                        {translate('deleteList')}
                       </Button>
-
                     </div>
-
                   )}
                 </div>
               </div>
@@ -141,43 +145,42 @@ function Home() {
         ))}
       </div>
 
-
       <Modal show={showAddModal} onHide={closeAddModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Create List</Modal.Title>
+          <Modal.Title>{translate('createList')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <input
             type="text"
             className="form-control"
-            placeholder="List name"
+            placeholder={translate('createList')}
             value={newListName}
             onChange={(e) => setNewListName(e.target.value)}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeAddModal}>
-            Close
+            {translate('close')}
           </Button>
           <Button variant="primary" onClick={createNewList}>
-            Create
+            {translate('create')}
           </Button>
         </Modal.Footer>
       </Modal>
 
       <Modal show={confirmDeleteList !== null} onHide={() => setConfirmDeleteList(null)}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Delete</Modal.Title>
+          <Modal.Title>{translate('confirmDelete')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Are you sure you want to delete this list?</p>
+          <p>{translate('confirmDelete')}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setConfirmDeleteList(null)}>
-            Cancel
+            {translate('cancel')}
           </Button>
           <Button variant="danger" onClick={confirmDelete}>
-            Delete
+            {translate('delete')}
           </Button>
         </Modal.Footer>
       </Modal>
