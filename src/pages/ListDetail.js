@@ -8,6 +8,10 @@ import { shoppingLists } from '../data/shopListsData';
 import itemList from '../data/itemList';
 import UserService from '../services/userService';
 
+import { useContext } from 'react';
+import { ThemeContext } from '../context/Theme';
+
+
 const ListDetail = () => {
   const { listId } = useParams();
   const navigate = useNavigate();
@@ -23,6 +27,11 @@ const ListDetail = () => {
   const [showModal, setShowModal] = useState(false);
   const [newListName, setNewListName] = useState(() => selectedList.name);
 
+  const { theme } = useContext(ThemeContext);
+  useEffect(() => {
+    document.body.className = theme === 'light' ? 'light-theme' : 'dark-theme';
+  }, [theme]);
+
   const initialItemsData = itemList.map((item, index) => ({ id: index + 1, ...item }));
   const selectedItemsData = selectedList.itemsList.map((itemId) => {
     const selectedItem = initialItemsData.find((item) => item.id === itemId);
@@ -37,7 +46,6 @@ const ListDetail = () => {
     }
   }, [selectedList, navigate]);
 
-
   const addItem = () => {
     if (selectedFood && !items.some((item) => item.name === selectedFood)) {
       const newItem = {
@@ -48,7 +56,7 @@ const ListDetail = () => {
       };
       setItems([...items, newItem]);
       setSelectedFood('');
-    }
+    } 
   };
 
   const removeItem = (itemId) => {
@@ -110,18 +118,18 @@ const ListDetail = () => {
           {listName}
         </h1>
         <div className="mt-4">
-        {currentUser.id !== selectedListOwner && (
-          <button className="btn btn-danger" onClick={leaveList}>
-            Leave List
-          </button>
-        )}
-      </div>
+          {currentUser.id !== selectedListOwner && (
+            <button className="btn btn-danger" onClick={leaveList}>
+              Leave List
+            </button>
+          )}
+        </div>
         {currentUser.id === selectedListOwner && (
           <div className="change-name col-md-4 col-sm-6">
             <button className="btn btn-primary btn-block" onClick={openModal}>
               Change List Name
             </button>
-            
+
             <Modal show={showModal} onHide={closeModal}>
               <Modal.Header closeButton>
                 <Modal.Title>Change List Name</Modal.Title>
@@ -245,8 +253,8 @@ const ListDetail = () => {
         </div>
       )}
       {currentUser.id !== selectedListOwner && (
-        <>          
-        <p>Users: </p>
+        <>
+          <p>Users: </p>
           <div
             className="uslist">
             <ul className="list-group" id="members-list">
@@ -258,7 +266,7 @@ const ListDetail = () => {
             </ul>
           </div></>
       )}
-     
+
     </div>
   );
 };

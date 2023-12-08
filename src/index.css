@@ -1,0 +1,10 @@
+/* V globálním CSS souboru */
+.light-theme {
+    background-color: #ffffff; /* Barva pozadí pro světlý režim */
+    color: #000000; /* Barva textu pro světlý režim */
+  }
+  
+  .dark-theme {
+    background-color: #363537; /* Barva pozadí pro tmavý režim */
+    color: #ffffff; /* Barva textu pro tmavý režim */
+  }

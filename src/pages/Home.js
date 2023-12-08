@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
 import { shoppingLists } from '../data/shopListsData';
 import UserService from '../services/userService';
 import '../styles/Home.css';
+
+import { useContext } from 'react';
+import { ThemeContext } from '../context/Theme';
 
 function Home() {
   const userService = new UserService();
@@ -14,6 +17,11 @@ function Home() {
   const [newListName, setNewListName] = useState('');
   const [confirmDeleteList, setConfirmDeleteList] = useState(null);
   const [showActive, setShowActive] = useState(true);
+
+  const { theme } = useContext(ThemeContext);
+  useEffect(() => {
+    document.body.className = theme === 'light' ? 'light-theme' : 'dark-theme';
+  }, [theme]);
 
   const openAddModal = () => {
     setShowAddModal(true);
@@ -75,7 +83,7 @@ function Home() {
   const filteredLists = showActive ? initialLists.filter((list) => !list.archived) : initialLists;
 
   return (
-    <div className="container">
+    <div className={`container ${theme === 'light' ? 'light-theme' : 'dark-theme'}`}>
       <h1 className="mt-1">Shopping Lists</h1>
 
       <div className="home-buttons mb-2">
